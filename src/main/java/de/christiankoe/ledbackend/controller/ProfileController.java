@@ -3,8 +3,11 @@ package de.christiankoe.ledbackend.controller;
 import de.christiankoe.ledbackend.config.ControllerMappings;
 import de.christiankoe.ledbackend.model.Profile;
 import de.christiankoe.ledbackend.services.ProfileService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RestControllerAdvice
@@ -19,13 +22,19 @@ public class ProfileController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Profile> getProfile(@PathVariable String id) {
-        return ResponseEntity.ok().build();
+        Optional<Profile> oProfile = profileService.getProfile(id);
+        if (oProfile.isEmpty()) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+
+
+        return ResponseEntity.ok(oProfile.get());
     }
 
     @PostMapping("/")
-    public ResponseEntity<Profile> postProfile(@RequestBody Profile profile) {
+    public ResponseEntity<Profile> postProfile() {
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(profileService.createProfile());
     }
 
     @GetMapping("/{a}/{b}")

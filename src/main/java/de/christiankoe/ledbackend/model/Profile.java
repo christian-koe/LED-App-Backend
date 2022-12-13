@@ -5,15 +5,17 @@ import java.util.List;
 public class Profile {
 
     private final List<Integer> colors;
+    private final String id;
     private boolean loop;
     private int offset;
     private int delay;
 
-    public Profile(boolean loop, int offset, int delay, List<Integer> colors) {
+    public Profile(String id, boolean loop, int offset, int delay, List<Integer> colors) {
         this.loop = loop;
         this.offset = offset;
         this.delay = delay;
         this.colors = colors;
+        this.id = id;
 
     }
 
@@ -24,8 +26,8 @@ public class Profile {
 
     public void removeColor(int color) {
 
-        colors.remove(new Integer(color));
-        
+        colors.remove(Integer.valueOf(color));
+
     }
 
 
@@ -37,6 +39,10 @@ public class Profile {
                 ", delay=" + delay +
                 ", colors=" + colors +
                 '}';
+    }
+
+    public String getId() {
+        return id;
     }
 
     public int getOffset() {
