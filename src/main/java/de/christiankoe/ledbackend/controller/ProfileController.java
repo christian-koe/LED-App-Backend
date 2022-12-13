@@ -19,13 +19,17 @@ public class ProfileController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Profile> getProfile(@PathVariable String id) {
-        return ResponseEntity.ok(profileService.getProfile(id));
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/")
     public ResponseEntity<Profile> postProfile(@RequestBody Profile profile) {
-        profileService.addProfile(profile);
+
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/{a}/{b}")
+    public int test(@PathVariable int a, @PathVariable int b) {
+        return a + b;
+    }
 }
