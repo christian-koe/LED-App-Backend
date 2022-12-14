@@ -24,7 +24,7 @@ public class ProfileController {
     public ResponseEntity<Profile> getProfile(@PathVariable String id) {
         Optional<Profile> oProfile = profileService.getProfile(id);
         if (oProfile.isEmpty()) {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
 
@@ -37,8 +37,14 @@ public class ProfileController {
         return ResponseEntity.ok(profileService.createProfile());
     }
 
-    @GetMapping("/{a}/{b}")
-    public int test(@PathVariable int a, @PathVariable int b) {
-        return a + b;
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Profile> deleteProfile(@PathVariable String id) {
+        Optional<Profile> oProfile = profileService.deleteProfile(id);
+        if (oProfile.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(oProfile.get());
+
+
     }
 }

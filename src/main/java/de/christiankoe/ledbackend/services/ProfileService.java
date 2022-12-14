@@ -25,17 +25,21 @@ public class ProfileService {
 
     }
 
-    public Profile deleteProfile() {
-        final Profile profile = null;
-        return profile;
-
-
-    }
 
     public Optional<Profile> getProfile(String id) {
 
         return profiles.parallelStream().filter(p -> p.getId().equals(id)).findFirst();
 
+
+    }
+
+    public Optional<Profile> deleteProfile(String id) {
+        Optional<Profile> delProfile = getProfile(id);
+        if (delProfile.isPresent()) {
+            profiles.remove(delProfile.get());
+        }
+
+        return delProfile;
 
     }
 
